@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaonian.core.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.xiaonian.core.entity.User" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="pswd" property="pswd" jdbcType="VARCHAR" />
+    <result column="role" property="role" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="full_name" property="fullName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, account, name, pswd, role, create_time, last_login_time, status, full_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xiaonian.core.entity.User" >
+    insert into user (id, account, name, 
+      pswd, role, create_time, 
+      last_login_time, status, full_name
+      )
+    values (#{id,jdbcType=BIGINT}, #{account,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{pswd,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastLoginTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaonian.core.entity.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="pswd != null" >
+        pswd,
+      </if>
+      <if test="role != null" >
+        role,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="fullName != null" >
+        full_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pswd != null" >
+        #{pswd,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginTime != null" >
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="fullName != null" >
+        #{fullName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaonian.core.entity.User" >
+    update user
+    <set >
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pswd != null" >
+        pswd = #{pswd,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        role = #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="fullName != null" >
+        full_name = #{fullName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiaonian.core.entity.User" >
+    update user
+    set account = #{account,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      pswd = #{pswd,jdbcType=VARCHAR},
+      role = #{role,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      full_name = #{fullName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="getAllByMap" resultMap="BaseResultMap" parameterType="java.util.Map" >
+     select
+    <include refid="Base_Column_List" />
+    from
+        user
+    where 1=1
+    <if test="account != null" >
+       and account = #{account,jdbcType=VARCHAR}
+    </if>
+    <if test="name != null" >
+       and name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="pswd != null" >
+       and pswd = #{pswd,jdbcType=VARCHAR}
+    </if>
+    <if test="role != null" >
+       and role = #{role,jdbcType=VARCHAR}
+    </if>
+    <if test="createTime != null" >
+       and create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="lastLoginTime != null" >
+       and last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="status != null" >
+       and status = #{status,jdbcType=VARCHAR}
+    </if>
+    <if test="fullName != null" >
+       and full_name = #{fullName,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKeys" parameterType="java.lang.Integer" >
+    DELETE FROM user
+    where id in
+    <foreach item="item" index="index" collection="array" open="("
+            separator="," close=")">
+			#{item}
+		</foreach>
+  </delete>
+  <select id="countByMap" resultType="java.lang.Integer" parameterType="java.util.Map" >
+     select
+    COUNT(1)
+    from
+        user
+    where 1=1
+    <if test="account != null" >
+       and full_name = #{fullName,jdbcType=VARCHAR}
+    </if>
+    <if test="name != null" >
+       and full_name = #{fullName,jdbcType=VARCHAR}
+    </if>
+    <if test="pswd != null" >
+       and full_name = #{fullName,jdbcType=VARCHAR}
+    </if>
+    <if test="role != null" >
+       and full_name = #{fullName,jdbcType=VARCHAR}
+    </if>
+    <if test="createTime != null" >
+       and full_name = #{fullName,jdbcType=VARCHAR}
+    </if>
+    <if test="lastLoginTime != null" >
+       and full_name = #{fullName,jdbcType=VARCHAR}
+    </if>
+    <if test="status != null" >
+       and full_name = #{fullName,jdbcType=VARCHAR}
+    </if>
+    <if test="fullName != null" >
+       and full_name = #{fullName,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

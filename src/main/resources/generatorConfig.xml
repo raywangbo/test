@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <!DOCTYPE generatorConfiguration 
+      PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+      "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+     
+    <generatorConfiguration>
+    <!-- 连接器jar -->
+    <classPathEntry location="D:\mysql-connector-java-5.1.28.jar" />
+    <context id="context1">
+    	<!-- 去掉注释 -->
+   		<commentGenerator>
+            <property name="suppressAllComments" value="true" />  
+            <property name="suppressDate" value="true" />  
+       </commentGenerator>
+   	  <!-- 连接器配置 -->
+      <!-- 连接器配置 -->
+      <jdbcConnection driverClass="${db.class}"
+                      connectionURL="${db.url}" userId="${db.username}"
+                      password="${db.password}" />
+      <javaTypeResolver>	
+         <property name="forceBigDecimals" value="false"/>
+      </javaTypeResolver>
+      <!-- 实体类目标地址 -->
+      <javaModelGenerator targetPackage="com.xiaonian.core.entity" targetProject="MAVEN">
+          <property name="enableSubPackages" value="true"/>
+          <property name="trimStrings" value="true"/>
+      </javaModelGenerator>
+       <!-- sql Mapper文件目标地址 -->
+      <sqlMapGenerator targetPackage="com.xiaoniao.core.dao" targetProject="MAVEN">
+           <property name="enableSubPackages" value="true"/>
+      </sqlMapGenerator>
+       <!-- data access object目标地址 -->
+      <javaClientGenerator type="XMLMAPPER" targetPackage="com.xiaonian.core.mapper.mapper" targetProject="MAVEN">
+        <property name="enableSubPackages" value="true"/>
+      </javaClientGenerator>
+      <!-- 表配置 -->
+      <table tableName="%"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <columnOverride column="picture" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      </table>
+
+    </context>
+    </generatorConfiguration>

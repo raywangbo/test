@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="xiaonian:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="xiaonian.war">
+      <element id="artifact" artifact-name="xiaonian:war exploded" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/taobao-sdk-java-auto_1455552377940-20160411.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/taobao-sdk-java-auto_1455552377940-20160411-source.jar" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            jqueryRequestJSON();
+        });
+        function jqueryRequestJSON() {
+            $.ajax({
+                url: "路径没什么好说的",
+                type: "POST",
+                dataType: "json",//告诉ajax，返回的数据时json类型的，这样就可以用data.xxx 来取值
+                beforeSend: LoadFunction, //加载执行方法
+                error: erryFunction, //错误执行方法
+                success: succFunction,//成功执行方法
+            });
+
+            function LoadFunction() {   //加载执行方法
+//            $("#bindAddress").html("加载中...");         //不需要显示可以注释掉
+            }
+
+            function erryFunction(data) {   //错误执行方法
+                alert("请求失败");
+                console.log(data);
+            }
+
+            function succFunction(data) {   //成功执行方法
+                $.each(data, function (i, items) {  //遍历获取数据
+                    var $tr = $("<tr></tr>"); //表格的一行，在里面可以加各种属性;
+                    var $td = $("<td></td>"); //行中的元素
+                    $tr.append($td.clone().text(items.symbol)); //把数据填充到单元格中
+                    $tr.append($td.clone().text(items.sname));
+                    $tr.append($td.clone().text(items.jjlx));
+                    $tr.append($td.clone().text(items.nav_date));
+                    $tr.append($td.clone().text(items.nav_date));
+                    $tr.append($td.clone().text(items.nav_date));
+                    $tr.append($td.clone().text(items.nav_date));
+                    $tr.append($td.clone().text(items.nav_date));
+                    $("#bindAddress").after($tr);//最后要把内容放入要绑定的地方
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+<table class="content-table">
+    <tr id="bindAddress" class="first-child">
+        <td class="first-child">时间</td>
+        <td class="nth2">会展名称</td>
+        <td class="nth3">主办方</td>
+        <td class="nth4">地点</td>
+        <td class="nth5">类型</td>
+        <td class="nth6">相关板块</td>
+        <td class="nth7">相关个股</td>
+        <td class="last-child">详情</td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,24 @@
+package ${package}.service;
+
+import ${package}.core.entity.${className};
+import com.xiaonian.baseTest.SpringTestCase;
+import com.xiaonian.core.service.I${className};
+import org.junit.Test;
+import org.junit.Assert;
+import org.springframework.beans.factory.annotation.Autowired;
+
+
+/**
+ * ${comments}
+ * 
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+public class Test${className}Service extends SpringTestCase
+{
+    @Autowired
+    private I${className}Service ${classname}Service;
+}
+
+

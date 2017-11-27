@@ -1,0 +1,46 @@
+package ${package}.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
+
+import ${package}.core.mapper.${className}Mapper;
+import ${package}.core.entity.${className};
+import ${package}.core.service.I${className}Service;
+
+@Service
+public class ${className}Service  extends BaseService<${className},${className}Mapper> implements I${className}Service{
+
+	private static Logger log = LoggerFactory.getLogger(${className}Service.class);
+
+	@Override
+	public ${className}Mapper getMapper()
+	{
+		return ${classname}Mapper;
+	}
+
+	@Autowired
+	private ${className}Mapper ${classname}Mapper;
+	
+	@Override
+	public void enable(int id)
+	{
+		${className} ${classname} = new ${className}();
+		${classname}.setId(id);
+		${classname}.setStatus(Constants.DATA_STATUS_NORMAL);
+		${classname}.setUpdateTime(DateUtils.getSystemTime());
+		getMapper().updateByPrimaryKeySelective(${classname});
+	}
+
+	@Override
+	public void disable(int id)
+	{
+		${className} ${classname} = new ${className}();
+		${classname}.setId(id);
+		${classname}.setStatus(Constants.DATA_STATUS_DEL);
+		${classname}.setUpdateTime(DateUtils.getSystemTime());
+		getMapper().updateByPrimaryKeySelective(${classname});
+	}
+}

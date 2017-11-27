@@ -1,0 +1,96 @@
+package ${package}.controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import ${package}.core.bean.PagerBean;
+import ${package}.core.bean.ResponseBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.stereotype.Controller;
+
+import ${package}.core.entity.${className};
+import ${package}.core.service.I${className}Service;
+import ${package}.core.service.impl.${className}Service;
+
+
+/**
+ * ${comments}
+ * 
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@Controller
+@RequestMapping("/admin/${classname}")
+public class ${className}MgrController extends CrudController<${className}, I${className}Service>{
+	@Autowired
+	private I${className}Service ${classname}Service;
+	
+	@Override
+	public I${className}Service getService()
+	{
+		return ${classname}Service;
+	}
+	
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	public @ResponseBody PagerBean<${className}> getAll(PagerBean<${className}> pager)
+	{	
+		return super.getAll(pager);
+	}
+	
+	@RequestMapping(value = "{id}", method = RequestMethod.GET)
+	public @ResponseBody Vo${className} get(@PathVariable("id") Integer id)
+	{
+		${className} ${classname} = ${classname}Service.getById(id);
+		Vo${className} json${classname} = new Vo${className}();
+		CommonUtil.copyPropertiesIgnoreNull(${classname}, json${classname});
+		json${classname}.setCreateTime(${classname}.getCreateTime().getTime());
+		return json${classname};
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public @ResponseBody ResponseBean post(${className} ${classname})
+	{
+
+		${classname}.setCreateTime(DateUtils.getSystemTime());
+		${classname}Service.save(${classname});
+		return toResponseJson();
+	}
+
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public @ResponseBody ResponseBean put(${className} ${classname})
+    {
+		${classname}.setUpdateTime(DateUtils.getSystemTime());
+		${classname}Service.update(${classname});
+        return toResponseJson();
+    }
+
+
+    @RequestMapping(value = "{ids}", method = RequestMethod.DELETE)
+	public @ResponseBody ResponseBean del(String ids)
+	{
+		return toResponseJson();
+	}
+	
+	@RequestMapping(value ="/enable", method = RequestMethod.POST)
+	public @ResponseBody ResponseBean enable(Integer id)
+	{
+		${classname}Service.enable(id);
+		return toResponseJson();
+	}
+	
+	@RequestMapping(value ="/disable", method = RequestMethod.POST)
+	public @ResponseBody ResponseBean disable(Integer id)
+	{
+		${classname}Service.disable(id);
+		return toResponseJson();
+	}
+	
+}
