@@ -1,6 +1,5 @@
 package com.xiaonian.web.controller;
 
-import com.github.pagehelper.PageHelper;
 import com.xiaonian.core.bean.PagerBean;
 import com.xiaonian.core.bean.ResponseBean;
 import com.xiaonian.core.constanst.Constants;
@@ -13,11 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 用户Controller
@@ -43,6 +38,21 @@ public class UserController  extends CrudController<User,IUserService>
     PagerBean<User> getAllUser(PagerBean<User> pagerBean)
     {
         return super.getAll(pagerBean);
+    }
+
+    @RequestMapping(value = "/getUserById", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseBean getUserById(Integer id){
+        ResponseBean responseBean = new ResponseBean();
+        User user = userService.getById(id);
+        JSONUser jsonUser = new JSONUser();
+        CommonUtil.copyPropertiesIgnoreNull(user,jsonUser);
+
+        responseBean.setMessage("获取用户成功");
+        responseBean.setErrCode(ErrCodeConstants.ERR_0_SUCCESS);
+        responseBean.setStatus(Constants.API_STATUS_SUCCESS);
+        responseBean.setData(jsonUser);
+        return responseBean;
     }
 
     @Override

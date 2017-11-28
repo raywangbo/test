@@ -3,13 +3,13 @@ import com.xiaonian.core.entity.User;
 import com.xiaonian.core.mapper.BaseMapper;
 
 public interface UserMapper extends BaseMapper<User> {
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(User record);
 
     int insertSelective(User record);
 
-    User selectByPrimaryKey(Long id);
+    User selectByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(User record);
 

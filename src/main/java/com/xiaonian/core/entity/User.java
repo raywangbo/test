@@ -3,7 +3,7 @@ package com.xiaonian.core.entity;
 import java.util.Date;
 
 public class User {
-    private Long id;
+    private Integer id;
 
     private String account;
 
@@ -21,11 +21,11 @@ public class User {
 
     private String fullName;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

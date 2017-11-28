@@ -36,7 +36,7 @@
           <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.3.1" />
           <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:1.2.2" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.31" />
-          <element id="library" level="project" name="Maven: com.alibaba:druid:0.2.25" />
+          <element id="library" level="project" name="Maven: com.alibaba:druid:1.0.15" />
           <element id="library" level="project" name="Maven: javax.servlet:servlet-api:2.5" />
           <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
           <element id="library" level="project" name="Maven: org.json:json:20151123" />

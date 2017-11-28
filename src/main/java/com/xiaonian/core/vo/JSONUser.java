@@ -9,7 +9,7 @@ import java.util.Date;
  * @create 2017/11/15 15:43
  */
 public class JSONUser {
-    private Long id;
+    private Integer id;
 
     private String account;
 
@@ -21,11 +21,11 @@ public class JSONUser {
 
     private String status;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
