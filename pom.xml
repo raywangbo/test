@@ -508,7 +508,7 @@
             </activation>
             <properties>
                 <db.class>com.mysql.jdbc.Driver</db.class>
-                <db.url>jdbc:mysql://120.78.215.29:3306/test?useUnicode=true&amp;amp;allowMultiQueries=true&amp;amp;autoReconnect=true&amp;amp;</db.url>
+                <db.url>jdbc:mysql://120.78.215.29:3306/test?useUnicode=true&amp;amp;allowMultiQueries=true&amp;amp;characterEncoding=UTF-8&amp;amp;autoReconnect=true&amp;amp;</db.url>
                 <db.username>root</db.username>
                 <db.password>123456</db.password>
             </properties>

@@ -221,29 +221,35 @@
                                     </header>
                                     <div class="panel-body">
                                         <div class="form">
-                                            <form class="form-validate form-horizontal " id="register_form" method="get" action="">
+                                            <form class="form-validate form-horizontal " id="userEdit_form" method="get" action="" onsubmit="updateUser()">
                                                 <div class="form-group ">
-                                                    <label for="fullname" class="control-label col-lg-2">账号<span class="required">*</span></label>
+                                                    <label for="userIdEdit" class="control-label col-lg-2">ID</label>
                                                     <div class="col-lg-10">
-                                                        <input class=" form-control" id="fullname" name="fullname" type="text" />
+                                                        <input class=" form-control" id="userIdEdit" name="userIdEdit" type="text" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group ">
-                                                    <label for="address" class="control-label col-lg-2">姓名<span class="required">*</span></label>
+                                                    <label for="userAccountEdit" class="control-label col-lg-2">账号</label>
                                                     <div class="col-lg-10">
-                                                        <input class=" form-control" id="address" name="address" type="text" />
+                                                        <input class=" form-control" id="userAccountEdit" name="userAccountEdit" type="text" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group ">
-                                                    <label for="username" class="control-label col-lg-2">全名<span class="required">*</span></label>
+                                                    <label for="userNameEdit" class="control-label col-lg-2">姓名</label>
                                                     <div class="col-lg-10">
-                                                        <input class="form-control " id="username" name="username" type="text" />
+                                                        <input class=" form-control" id="userNameEdit" name="userNameEdit" type="text" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group ">
-                                                    <label for="password" class="control-label col-lg-2">状态<span class="required">*</span></label>
+                                                    <label for="userFullNameEdit" class="control-label col-lg-2">全名</label>
                                                     <div class="col-lg-10">
-                                                        <input class="form-control " id="password" name="password" type="password" />
+                                                        <input class="form-control " id="userFullNameEdit" name="userFullNameEdit" type="text" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group ">
+                                                    <label for="userStatusEdit" class="control-label col-lg-2">状态</label>
+                                                    <div class="col-lg-10">
+                                                        <input class="form-control " id="userStatusEdit" name="userStatusEdit" type="text" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -357,8 +363,8 @@
             html += '<td>' + status + '</td>';
             html += '<td>\n' +
                 '<div class="btn-group">\n' +
-                '<a class="btn btn-success" href="#"><i class="icon_document_alt" onclick="editUserFunction(id)"></i></a>\n' +
-                '<a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>\n' +
+                '<a class="btn btn-success" href="#"><i class="icon_document_alt" onclick="editUserFunction('+id+')"></i></a>\n' +
+                '<a class="btn btn-danger" href="#"><i class="icon_close_alt2"  onclick="deleteUserFunction('+id+')"></i></a>\n' +
                 '</div>\n' +
                 ' </td>';
             html += '</tr>';
@@ -538,15 +544,54 @@
         $.ajax({
             url: '/user/getUserById',
             type: 'GET',
-            date: id,
+            data:{id:id},
             dataType: 'json',
             timeout: 1000,
             cache: false,
-            success:function(data){
-                
+            success:function(tt){
+                var obj = eval(tt.data);
+                $("#userIdEdit").val(id);
+                $("#userAccountEdit").val(obj.account);
+                $("#userNameEdit").val(obj.name);
+                $("#userFullNameEdit").val(obj.fullName);
+                $("#userStatusEdit").val(obj.status);
             }
         });
-       $("#userEdit").css("visibility","visible");
+        $("#userEdit").css("visibility","visible");
+    }
+
+</script>
+
+<script>
+    function updateUser() {
+        var id = $("#userIdEdit").val();
+        var account = $("#userAccountEdit").val();
+        var name = $("#userNameEdit").val();
+        var fullName = $("#userFullNameEdit").val();
+        var status = $("#userStatusEdit").val();
+        $.ajax({
+            url: '/user/updateUser',
+            type: 'POST',
+            data:{id:id,account:account,name:name,fullName:fullName,status:status},
+            dataType: 'json',
+            timeout: 1000,
+            success:function () {
+                alert(id + "保存成功!");
+            }
+        });
+    }
+    function deleteUserFunction(id) {
+        $.ajax({
+            url: '/user/deleteUser',
+            type: 'POST',
+            data: {id: id},
+            dataType: 'json',
+            timeout: 1000,
+            success:function(){
+                alert(id + "删除成功");
+                location.reload();
+            }
+        });
     }
 </script>
 </body>

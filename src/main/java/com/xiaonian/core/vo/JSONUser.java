@@ -15,6 +15,8 @@ public class JSONUser {
 
     private String name;
 
+    private String fullName;
+
     private Date createTime;
 
     private Date lastLoginTime;
@@ -69,12 +71,21 @@ public class JSONUser {
         this.status = status;
     }
 
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
     @Override
     public String toString() {
         return "JSONUser{" +
                 "id=" + id +
                 ", account='" + account + '\'' +
                 ", name='" + name + '\'' +
+                ", fullName='" + fullName + '\'' +
                 ", createTime=" + createTime +
                 ", lastLoginTime=" + lastLoginTime +
                 ", status='" + status + '\'' +

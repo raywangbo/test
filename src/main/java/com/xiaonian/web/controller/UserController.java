@@ -40,23 +40,58 @@ public class UserController  extends CrudController<User,IUserService>
         return super.getAll(pagerBean);
     }
 
+    /**
+     * 根据id获取用户信息
+     * @Auther Ray
+     * @Date 2017/11/28 8:54
+     * @param id 用户id
+     */
     @RequestMapping(value = "/getUserById", method = RequestMethod.GET)
     public @ResponseBody
     ResponseBean getUserById(Integer id){
-        ResponseBean responseBean = new ResponseBean();
         User user = userService.getById(id);
         JSONUser jsonUser = new JSONUser();
         CommonUtil.copyPropertiesIgnoreNull(user,jsonUser);
 
-        responseBean.setMessage("获取用户成功");
-        responseBean.setErrCode(ErrCodeConstants.ERR_0_SUCCESS);
-        responseBean.setStatus(Constants.API_STATUS_SUCCESS);
-        responseBean.setData(jsonUser);
-        return responseBean;
+        return toJson("用户获取成功",jsonUser);
     }
 
+    /**
+     * 更新用户信息
+     * @Auther Ray
+     * @Date 2017/11/28 8:56
+     * @param user 用户id
+     */
+    @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
+    public @ResponseBody
+    ResponseBean updateUser(User user){
+        userService.update(user);
+        return toJson("用户更新成功",null);
+    }
+
+    @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
+    public @ResponseBody
+    ResponseBean deleteUser(String id){
+        userService.deleteByIds(id);
+        return toJson("删除用户成功",null);
+    }
     @Override
     public IUserService getService() {
         return userService;
+    }
+
+    /**
+     * 返回ResponseBean获取信息成功对象
+     * @Auther Ray
+     * @Date 2017/11/28 18:56
+     * @param msg
+     */
+    private ResponseBean toJson(String msg,Object data){
+        ResponseBean responseBean = new ResponseBean();
+        responseBean.setMessage(msg);
+        responseBean.setErrCode(ErrCodeConstants.ERR_0_SUCCESS);
+        responseBean.setStatus(Constants.API_STATUS_SUCCESS);
+        responseBean.setData(data);
+        return responseBean;
     }
 }
