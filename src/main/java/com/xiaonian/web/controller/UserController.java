@@ -69,6 +69,12 @@ public class UserController  extends CrudController<User,IUserService>
         return toJson("用户更新成功",null);
     }
 
+    /**
+     * 删除用户
+     * @Auther Ray
+     * @Date 2017/11/29 9:42
+     * @param id
+     */
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
     public @ResponseBody
     ResponseBean deleteUser(String id){
