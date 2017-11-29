@@ -228,7 +228,7 @@
                                     </header>
                                     <div class="panel-body">
                                         <div class="form">
-                                            <form class="form-validate form-horizontal " id="userEdit_form" method="get" action="" onsubmit="updateUser()">
+                                            <form class="form-validate form-horizontal " id="userEdit_form">
                                                 <div class="form-group ">
                                                     <label for="userIdEdit" class="control-label col-lg-2">ID</label>
                                                     <div class="col-lg-10">
@@ -261,7 +261,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-lg-offset-2 col-lg-10">
-                                                        <button class="btn btn-primary" type="submit">保存</button>
+                                                        <button class="btn btn-primary" type="button" onclick="updateUser()">保存</button>
                                                         <button class="btn btn-default" type="button" onclick=$("#userEdit").css("visibility","hidden")>取消</button>
                                                     </div>
                                                 </div>
@@ -584,6 +584,7 @@
             timeout: 1000,
             success:function () {
                 alert(id + "保存成功!");
+                location.reload();
             }
         });
     }
